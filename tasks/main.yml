@@ -1,0 +1,25 @@
+---
+# tasks file for ansible-role-lanikea-restore
+# mount elixir-it cvmfs containing flavour packages
+
+- name: CVMFS
+  include_role: 
+    name: galaxyproject.cvmfs
+  vars:
+    cvmfs_role: client
+    galaxy_cvmfs_repos_enabled: config-repo
+
+- name: download elixir-italy-cvmfs config
+  get_url:
+    url: 'https://raw.githubusercontent.com/indigo-dc/Reference-data-galaxycloud-repository/master/{{ item.conf_file }}/{{ la_cvmfs_repository}}.{{ item.ext }}'
+    dest: '/etc/cvmfs/{{ item.dest_dir }}/{{ la_cvmfs_repository}}.{{ item.ext }}'
+  with_items:
+    - { conf_file: cvmfs_server_config_files , dest_dir: config.d , ext: conf}
+    - { conf_file: cvmfs_server_keys , dest_dir: keys , ext: pub }
+
+- name: probe elixir cvmfs
+  shell:
+    cmd: 'cvmfs_config probe {{ la_cvmfs_repository}}'
+
+##implant selected flavor
+- include: restore_flavor.yml

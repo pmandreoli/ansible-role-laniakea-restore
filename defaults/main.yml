@@ -1,0 +1,4 @@
+---
+# defaults file for ansible-role-lanikea-restore
+galaxy_flavor: galaxy-testing
+la_cvmfs_repository: elixir-italy.galaxy.refdata

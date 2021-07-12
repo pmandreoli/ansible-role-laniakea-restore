@@ -1,0 +1,13 @@
+
+- name: upload the python script for database restore 
+  become: true
+  template:
+    src: express-cvmfs-restore.py.j2
+    dest: /tmp/express-cvmfs-restore.py
+    owner: root
+    group: root
+    mode: u=rwx,g=rw,o=r
+
+- name: run python script to restore flavor
+  become: true
+  command: /tmp/express-cvmfs-restore.py -f {{ galaxy_flavor }} 
