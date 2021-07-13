@@ -11,6 +11,7 @@ shed_tool_destination='/home/galaxy/galaxy/var/shed_tools/'
 cvmfs= "elixir-italy.galaxy.refdata"
 cvmfs_path='/cvmfs/'+ cvmfs + '/'
 cvmfs_dump= cvmfs_path + '/express-dump/'
+config_dir='/home/galaxy/galaxy/config'
 
 def parse_cli_options():
   parser = argparse.ArgumentParser(description='untar flavor packages', formatter_class=argparse.RawTextHelpFormatter)
@@ -46,12 +47,15 @@ def untar_conda_and_shell():
     options = parse_cli_options()
     conda_file = cvmfs_dump + str(options.flavor) + '/'+ str(options.flavor) + '_conda.tar.gz'
     shed_tools_file = cvmfs_dump + str(options.flavor) + '/' + str(options.flavor) +'_shed_tools.tar.gz'
+    shed_tools_config = cvmfs_dump + str(options.flavor) + '/shed_tool_conf.xml'
     clean_destinations()
     print("FLAVOR_RESTORE: cleaning")
     extract_tar_gz(shed_tools_file, shed_tool_destination)
     print("FLAVOR_RESTORE: restoring shed_tools")
     extract_tar_gz(conda_file, conda_destination)
     print("FLAVOR_RESTORE: restoring conda dir")
+    command_copy_config="cp "+ str(shed_tools_config)+" "+ str(config_dir) 
+    os.system(command_copy_config)
 
 # bash restore postgresql pg_restore -d db_name /path/to/your/file/dump_name.tar -c -U db_user
 def manage_services(smd_cmd):
