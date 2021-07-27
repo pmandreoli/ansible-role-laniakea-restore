@@ -1,5 +1,9 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: restore
+  hosts: galaxy
+  become: true
+  vars:
+    galaxy_flavor: galaxy-testing
   roles:
-    - ansible-role-lanikea-restore
+    - { role: ../../ansible-role-laniakea-restore }
+ 

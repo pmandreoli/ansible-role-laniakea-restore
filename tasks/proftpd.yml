@@ -1,0 +1,5 @@
+
+- name: install proftpd
+  yum:
+    name: proftpd
+    state: present

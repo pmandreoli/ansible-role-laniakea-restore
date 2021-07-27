@@ -24,5 +24,8 @@
   shell:
     cmd: 'cvmfs_config probe {{ la_cvmfs_repository}}'
 
+### install proftpd
+- include: proftpd.yml
+
 ##implant selected flavor
 - include: restore_flavor.yml

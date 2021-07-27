@@ -1,2 +1,2 @@
-localhost
-
+[galaxy] 
+<IP> ansible_connection=ssh ansible_user=centos
