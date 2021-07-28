@@ -1,5 +1,27 @@
+---
+- name: Include proftpd role
+  include_role:
+    name: galaxyproject.proftpd
+  vars:
+    proftpd_options:
+      - User: galaxy
+      - Group: galaxy
+      - DefaultAddress: "{{ ansible_default_ipv4.address }}"
+    proftpd_sql_db: galaxy@/var/run/postgresql
+    galaxy_user: galaxy
+    proftpd_sql_user: galaxy
+    proftpd_welcome: "galaxy ftp server"
+    proftpd_db_user: "galaxyftp"
+    proftpd_db_passwd: 'galaxy'
+    proftpd_files_path: "{{ database_path }}/ftp"
+    proftpd_ftp_port: 21
+    proftpd_passive_port_low: 30000
+    proftpd_passive_port_high: 30009
+    set_proftpd_random_password: true
+    proftpd_galaxy_auth: yes
+    galaxy_ftp_upload_dir: '{{ database_path }}/ftp' 
 
-- name: install proftpd
-  yum:
-    name: proftpd
-    state: present
+##TODO add     
+#    ftp_upload_dir: /data/galaxy/database/ftp
+#    ftp_upload_site: ftp://localhost
+# to galaxy.yml

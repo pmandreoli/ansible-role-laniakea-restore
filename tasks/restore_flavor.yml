@@ -1,8 +1,11 @@
-- name: Check for java exists in /opt 
+--- 
+#check if conda exist in export to do not extract the file 
+#testing phase task
+
+- name: check conda existence 
   stat: 
     path: /export/tool_deps/_conda
   register: conda
-  
 
 - name: upload the python script for database restore 
   become: true

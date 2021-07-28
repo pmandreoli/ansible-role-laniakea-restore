@@ -26,6 +26,14 @@
 
 ### install proftpd
 - include: proftpd.yml
+  become: yes
+  become_user: root
 
+####
+- name: create admin user
+  include: admin_user.yml
+  become: true
+  become_user: galaxy
+ 
 ##implant selected flavor
 - include: restore_flavor.yml
