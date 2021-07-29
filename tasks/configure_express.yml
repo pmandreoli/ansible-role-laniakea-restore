@@ -1,0 +1,28 @@
+---
+
+- name: Stop Galaxy
+  systemd:
+    name: "{{ 'galaxy' if (uwsgi_mode == 'mule') else 'galaxy-zergling@0'}}"
+    state: stopped
+
+- name: sudo wo a psswd for galaxy user(maybe move it to image creation)
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: galaxy ALL=(ALL) NOPASSWD:ALL
+
+  
+- name: create log file directory (maybe move it to image creation)
+  file:
+    path: /var/log/galaxy
+    state: directory
+    owner: galaxy 
+    group: galaxy
+    mode: 755
+
+- name: substitute galaxy config
+  template:
+    src: galaxy.yml.j2
+    dest: "{{ laniakea_galaxy_config_file }}"
+    owner: galaxy
+    group: galaxy

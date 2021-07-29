@@ -1,0 +1,90 @@
+---
+uwsgi:
+    buffer-size: 16384
+    die-on-term: true
+    enable-threads: true
+    hook-master-start: unix_signal:2 gracefully_kill_them_all
+    hook-master-start: unix_signal:15 gracefully_kill_them_all
+    logto: /var/log/galaxy/uwsgi.log
+    manage-script-name: true
+    master: true
+    module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+    no-orphans: true
+    offload-threads: 2
+    processes: 3
+    py-call-osafterfork: true
+    pythonpath: /home/galaxy/galaxy/server/lib
+    socket: 127.0.0.1:4001
+    static-map: /static/style=/home/galaxy/galaxy/server/static/style
+    static-map: /static=/home/galaxy/galaxy/server/static
+    static-map: /favicon.ico=/home/galaxy/galaxy/server/static/favicon.ico
+    static-safe: client/galaxy/images
+    stats: 127.0.0.1:4010
+    threads: 4
+    thunder-lock: true
+    virtualenv: /home/galaxy/galaxy/venv
+
+galaxy:
+    admin_users: "{{ GALAXY_ADMIN_EMAIL }}" 
+    allow_user_creation: 'True'
+    allow_user_impersonation: 'True'
+    brand: "{{ laniakea_galaxy_brand }}"
+    builds_file_path: /home/galaxy/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
+    check_migrate_tools: false
+    citation_cache_data_dir: /export/galaxy/database/citations/data
+    citation_cache_lock_dir: /export/galaxy/database/citations/lock
+    cluster_file_directory: /export/galaxy/database/pbs
+    conda_auto_install: true
+    conda_prefix: /export/tool_deps/_conda
+    container_image_cache_path: /home/galaxy/galaxy/var/cache/container_cache
+    data_manager_config_file: /home/galaxy/galaxy/server/config/data_manager_conf.xml.sample
+    database_connection: postgresql:///galaxy?host=/var/run/postgresql
+    datatypes_config_file: /home/galaxy/galaxy/server/config/datatypes_conf.xml.sample
+    external_service_type_config_file: /home/galaxy/galaxy/server/config/external_service_types_conf.xml.sample
+    file_path: /export/galaxy/database/files
+    ftp_upload_dir: /export/galaxy/database/ftp
+    ftp_upload_site: ftp://localhost
+    install_database_connection: postgresql:///galaxy_tools?host=/var/run/postgresql
+    integrated_tool_panel_config: /home/galaxy/galaxy/config/integrated_tool_panel.xml
+    job_config_file: /home/galaxy/galaxy/config/job_conf.xml
+    job_working_directory: /export/galaxy/database/job_working_directory
+    migrated_tools_config: /home/galaxy/galaxy/config/migrated_tools_conf.xml
+    mulled_resolution_cache_data_dir: /home/galaxy/galaxy/var/mulled/data
+    mulled_resolution_cache_lock_dir: /home/galaxy/galaxy/var/mulled/lock
+    new_file_path: /export/galaxy/database/tmp
+    new_user_dataset_access_role_default_private: 'True'
+#    nginx_upload_path: /_upload
+#    nginx_upload_store: /export/galaxy/database/tmp/nginx_upload_store
+    object_store_cache_path: /export/galaxy/database/object_store_cache
+    openid_config_file: /home/galaxy/galaxy/server/config/openid_conf.xml.sample
+    openid_consumer_cache_path: /home/galaxy/galaxy/var/cache/openid_consumer_cache
+    require_login: 'True'
+    shed_data_manager_config_file: /home/galaxy/galaxy/config/shed_data_manager_conf.xml
+    shed_tool_config_file: /home/galaxy/galaxy/config/shed_tool_conf.xml
+    shed_tool_data_table_config: /home/galaxy/galaxy/config/shed_tool_data_table_conf.xml
+    template_cache_path: /export/galaxy/database/compiled_templates
+    tool_cache_data_dir: /export/galaxy/database/tool_cache
+    tool_config_file: /home/galaxy/galaxy/server/config/tool_conf.xml.sample
+    tool_data_path: /home/galaxy/galaxy/var/tool-data
+    tool_data_table_config_path: /home/galaxy/galaxy/server/config/tool_data_table_conf.xml.sample
+    tool_dependency_dir: /export/tool_deps
+    tool_search_index_dir: /export/galaxy/database/tool_search_index_dir
+    tool_sheds_config_file: /home/galaxy/galaxy/config/tool_sheds_conf.xml
+    ucsc_build_sites: /home/galaxy/galaxy/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample
+    visualization_plugins_directory: config/plugins/visualizations
+    whoosh_index_dir: /export/galaxy/database/whoosh_indexes
+# BEGIN ANSIBLE MANAGED BLOCK
+#uwsgi mode mule
+    mule: lib/galaxy/main.py
+    farm: job-handlers:1
+# END ANSIBLE MANAGED BLOCK
+#    interactive_environment_plugins_directory: /home/galaxy/galaxy/server/config/plugins/interactive_environments
+#    #interactive_block
+#    dynamic_proxy_manage: true
+#    dynamic_proxy_session_map: /export/galaxy/database/session_map.sqlite
+#    dynamic_proxy_bind_port: 8800
+#    dynamic_proxy_bind_ip: 0.0.0.0
+#    dynamic_proxy_debug: true
+#    dynamic_proxy_external_proxy: true
+#    dynamic_proxy_prefix: gie_proxy
+
