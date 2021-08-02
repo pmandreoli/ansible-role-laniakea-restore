@@ -2,7 +2,8 @@
 # defaults file for ansible-role-lanikea-restore
 galaxy_flavor: galaxy-testing
 la_cvmfs_repository: elixir-italy.galaxy.refdata
-database_path: /export
+database_path: /export/galaxy/database
+tool_deps_path: /export/tool_deps
 laniakea_galaxy_venv_dir: /home/galaxy/galaxy/venv
 laniakea_galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
 laniakea_galaxy_brand: EXPRESS-TEST

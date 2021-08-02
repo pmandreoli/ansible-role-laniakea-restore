@@ -5,3 +5,7 @@
     name: "{{ 'galaxy' if (uwsgi_mode == 'mule') else 'galaxy-zergling@0'}}"
     state: restarted
 
+- name: Restart proftpd
+  systemd:
+    name: proftpd
+    state: restarted
