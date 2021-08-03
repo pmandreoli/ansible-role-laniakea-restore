@@ -9,3 +9,8 @@
   systemd:
     name: proftpd
     state: restarted
+
+- name: Restart nginx
+  systemd:
+    name: nginx
+    state: restarted

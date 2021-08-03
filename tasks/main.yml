@@ -41,4 +41,6 @@
 ##implant selected flavor
 - include: restore_flavor.yml
 
+- include: nginx_upload.yml
+
 - meta: flush_handlers
