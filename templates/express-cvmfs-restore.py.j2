@@ -6,12 +6,12 @@ import shutil
 import subprocess
 import glob
 
-conda_destination='/export/tool_deps/' 
-shed_tool_destination='/home/galaxy/galaxy/var/shed_tools/'
-cvmfs= "elixir-italy.galaxy.refdata"
+conda_destination='{{ restore_conda_destination }}' 
+shed_tool_destination='{{ shed_tool_destination }}'
+cvmfs= "{{ la_cvmfs_repository }}"
 cvmfs_path='/cvmfs/'+ cvmfs + '/'
 cvmfs_dump= cvmfs_path + '/express-dump/'
-config_dir='/home/galaxy/galaxy/config'
+config_dir='{{ laniakea_galaxy_config_dir }}'
 
 def parse_cli_options():
   parser = argparse.ArgumentParser(description='untar flavor packages', formatter_class=argparse.RawTextHelpFormatter)

@@ -5,7 +5,9 @@ la_cvmfs_repository: elixir-italy.galaxy.refdata
 database_path: /export/galaxy/database
 tool_deps_path: /export/tool_deps
 laniakea_galaxy_venv_dir: /home/galaxy/galaxy/venv
-laniakea_galaxy_config_file: /home/galaxy/galaxy/config/galaxy.yml
+laniakea_galaxy_config_dir: /home/galaxy/galaxy/config
+laniakea_galaxy_config_file: '{{ laniakea_galaxy_config_dir }}/galaxy.yml'
+restore_conda_destination: /export/tool_deps/ 
 laniakea_galaxy_brand: EXPRESS-TEST
 GALAXY_ADMIN_USERNAME: admintest
 GALAXY_ADMIN_EMAIL: admintest@server.com
@@ -13,3 +15,4 @@ GALAXY_ADMIN_PASSWORD: galaxy_admin_password
 GALAXY_ADMIN_API_KEY: galaxy_admin_api_key
 laniakea_galaxy_server_dir: /home/galaxy/galaxy/server
 uwsgi_mode: mule
+shed_tool_destination: /home/galaxy/galaxy/var/shed_tools/

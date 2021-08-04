@@ -2,10 +2,15 @@
 #check if conda exist in export to do not extract the file 
 #testing phase task
 
-- name: check conda existence 
+- name: check flavor file  existence 
   stat: 
     path: "/tmp/{{ galaxy_flavor }}"
   register: flavor
+
+- name: install ephemeris for workflow installation
+  pip:
+    name: ephemeris
+    virtualenv: '{{ laniakea_galaxy_venv_dir }}'
 
 - name: upload the python script for database restore 
   become: true
@@ -21,3 +26,14 @@
   become: true
   command: /tmp/express-cvmfs-restore.py -f {{ galaxy_flavor }} 
   when: not flavor.stat.exists
+  register: restore_script
+
+- name: install workflows  
+  become: true
+  become_user: galaxy
+  shell: '. {{ laniakea_galaxy_venv_dir }}/bin/activate && workflow-install \
+  -w /cvmfs/elixir-italy.galaxy.refdata/express-dump/{{ galaxy_flavor }}/workflows \ 
+  -a {{ GALAXY_ADMIN_API_KEY }} -g http://localhost:80'
+  when: restore_script is changed
+  tags:
+    - workflows
