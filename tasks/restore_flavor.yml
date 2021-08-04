@@ -4,8 +4,8 @@
 
 - name: check conda existence 
   stat: 
-    path: /export/tool_deps/_conda
-  register: conda
+    path: "/tmp/{{ galaxy_flavor }}"
+  register: flavor
 
 - name: upload the python script for database restore 
   become: true
@@ -15,9 +15,9 @@
     owner: root
     group: root
     mode: u=rwx,g=rw,o=r
-    #  when: not conda.stat.exists
+  when: not flavor.stat.exists
 
 - name: run python script to restore flavor
   become: true
   command: /tmp/express-cvmfs-restore.py -f {{ galaxy_flavor }} 
-  #  when: not conda.stat.exists
+  when: not flavor.stat.exists

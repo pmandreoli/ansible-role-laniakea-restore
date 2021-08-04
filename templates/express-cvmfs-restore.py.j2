@@ -73,6 +73,11 @@ def restore_dump():
   os.system(command_restore)
   print("restore galaxy_tools database flavor")
 
+def lock_file():
+    options = parse_cli_options()
+    command_file = "sudo touch /tmp/"+str(options.flavor)
+    os.system(command_file)
+
 def main():
     
   manage_services("stop")
@@ -80,5 +85,6 @@ def main():
   restore_dump()
   manage_services("start")
   check_cvmfs()
+  lock_file()
 
 main()

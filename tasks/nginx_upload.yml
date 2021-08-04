@@ -3,7 +3,7 @@
   become_user: root
   blockinfile:
     path: /etc/nginx/sites-available/galaxy 
-    insertafter: "# handle file uploads via the upload module" 
+    insertbefore: "^}" 
     block: |
       location /_upload {
           upload_store {{ database_path }}/tmp/nginx_upload_store;
