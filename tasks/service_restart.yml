@@ -1,5 +1,5 @@
 ---
-# handlers file for ansible-role-lanikea-restore
+# restart services
 - name: Restart Galaxy
   systemd:
     name: "{{ 'galaxy' if (uwsgi_mode == 'mule') else 'galaxy-zergling@0'}}"
