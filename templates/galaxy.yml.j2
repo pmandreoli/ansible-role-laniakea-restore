@@ -28,7 +28,7 @@ galaxy:
     admin_users: "{{ GALAXY_ADMIN_EMAIL }}" 
     allow_user_creation: 'True'
     allow_user_impersonation: 'True'
-    brand: "{{ laniakea_galaxy_brand }}"
+    brand: "{{ galaxy_instance_description }}"
     builds_file_path: /home/galaxy/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
     check_migrate_tools: false
     citation_cache_data_dir: {{ database_path }}/citations/data

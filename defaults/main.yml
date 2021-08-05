@@ -1,21 +1,65 @@
 ---
 # defaults file for ansible-role-lanikea-restore
-galaxy_flavor: galaxy-testing
-la_cvmfs_repository: elixir-italy.galaxy.refdata
-database_path: /export/galaxy/database
-tool_deps_path: /export/tool_deps
-laniakea_galaxy_venv_dir: /home/galaxy/galaxy/venv
-laniakea_galaxy_config_dir: /home/galaxy/galaxy/config
+
+# Galaxy instance description
+galaxy_instance_description: "ELIXIR-Express"
+
+# Path to install the Galaxy software
+galaxy_FS_path: /home/galaxy
+
+# Galaxy install path 
+galaxy_install_path: "{{galaxy_FS_path}}/galaxy"
+
+# Galaxy export volume
+export_dir: "/export"
+
+# Galaxy database path
+database_path: '{{ export_dir }}/galaxy/database'
+
+## Tool dependency directory
+tool_deps_path: "{{ export_dir }}/tool_deps"
+
+# Galaxy virtual env directory 
+laniakea_galaxy_venv_dir: '{{ galaxy_install_path }}/venv'
+
+# Galaxy config directory
+laniakea_galaxy_config_dir: '{{ galaxy_install_path }}/config'
+
+# Galaxy config file path
 laniakea_galaxy_config_file: '{{ laniakea_galaxy_config_dir }}/galaxy.yml'
-restore_conda_destination: /export/tool_deps/ 
-laniakea_galaxy_brand: EXPRESS-TEST
+
+# Galaxy server directory path
+laniakea_galaxy_server_dir: '{{ galaxy_install_path }}/server'
+
+#______________________________________
+# flavor restore
+
+# Galaxy flavor to restore 
+galaxy_flavor: galaxy-testing
+
+# Destination of tool repository
+shed_tool_destination: '{{ galaxy_install_path }}/var/shed_tools'
+
+# cvmfs that contain the flavor packages
+restore_cvmfs_repository: elixir-italy.galaxy.refdata
+
+#______________________________________
+# Galaxy administrator
+
+# Galaxy administrator username
 GALAXY_ADMIN_USERNAME: admintest
-GALAXY_ADMIN_EMAIL: admintest@server.com
+
+# Galaxy administrator password.
+# It is hard coded. To be changed by the administrator.
 GALAXY_ADMIN_PASSWORD: galaxy_admin_password
+
+# Galaxy administrator API_KEY. https://wiki.galaxyproject.org/Admin/API
+# Please note that this key acts as an alternate means to access your account, and should be treated with the same care as your login password. To be changed by the administrator.
 GALAXY_ADMIN_API_KEY: galaxy_admin_api_key
-laniakea_galaxy_server_dir: /home/galaxy/galaxy/server
-uwsgi_mode: mule
-shed_tool_destination: /home/galaxy/galaxy/var/shed_tools/
+
+# Galaxy administrator e-mail address
+GALAXY_ADMIN_EMAIL: admintest@server.com
+
 #_____________________________________
 ## Job_conf variables
 galaxy_workers: 4
@@ -24,3 +68,7 @@ galaxy_registered_concurrent_jobs: 2
 galaxy_unregistered_concurrent_jobs: 0
 galaxy_instance_codename: galaxy
 galaxy_lrms: local
+
+#_____________________________________
+# uwsgi
+uwsgi_mode: mule

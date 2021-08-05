@@ -6,9 +6,9 @@ import shutil
 import subprocess
 import glob
 
-conda_destination='{{ restore_conda_destination }}' 
+conda_destination='{{ tool_deps_path }}' 
 shed_tool_destination='{{ shed_tool_destination }}'
-cvmfs= "{{ la_cvmfs_repository }}"
+cvmfs= "{{ restore_cvmfs_repository }}"
 cvmfs_path='/cvmfs/'+ cvmfs + '/'
 cvmfs_dump= cvmfs_path + '/express-dump/'
 config_dir='{{ laniakea_galaxy_config_dir }}'
