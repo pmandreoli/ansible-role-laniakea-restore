@@ -16,3 +16,11 @@ GALAXY_ADMIN_API_KEY: galaxy_admin_api_key
 laniakea_galaxy_server_dir: /home/galaxy/galaxy/server
 uwsgi_mode: mule
 shed_tool_destination: /home/galaxy/galaxy/var/shed_tools/
+#_____________________________________
+## Job_conf variables
+galaxy_workers: 4
+galaxy_local_slot: 2
+galaxy_registered_concurrent_jobs: 2
+galaxy_unregistered_concurrent_jobs: 0
+galaxy_instance_codename: galaxy
+galaxy_lrms: local

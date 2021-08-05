@@ -43,4 +43,6 @@
 
 - include: nginx_upload.yml
 
+- include: job_conf.yml
+
 - meta: flush_handlers
