@@ -1,6 +1,6 @@
 Role Name
 =========
-Role to plant lanikaea flavor in a Galaxy-minimal instance
+Role to plant lanikaea flavor in a Galaxy-minimal instance.
 
 Requirements
 ------------
@@ -11,12 +11,21 @@ tested on CentOS7
 Role Variables
 --------------
 
-`galaxy_flavor`: laniakea-galaxy-flavor
+`galaxy_flavor`: galaxy-testing
 
 Dependencies
 ------------
+### Infrastructure:
 
-`galaxyproject.cvmfs` role
+**galaxy virtual machine:**
+- deployed using the image `galaxy20_05lite` 
+- with a volume mounted in `/export`  
+this vm can be deployed on Openstack cloud  using the Terraform recipe at 
+https://github.com/pmandreoli/TerraFormExpress
+
+### Roles
+
+- `galaxyproject.cvmfs` role
 
 Example Playbook
 ----------------
