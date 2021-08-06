@@ -60,6 +60,9 @@ GALAXY_ADMIN_API_KEY: galaxy_admin_api_key
 # Galaxy administrator e-mail address
 GALAXY_ADMIN_EMAIL: admintest@server.com
 
+# Reference data cvmfs
+ref_data_cvmfs_server: data.galaxyproject.org
+
 #_____________________________________
 ## Job_conf variables
 galaxy_workers: 4

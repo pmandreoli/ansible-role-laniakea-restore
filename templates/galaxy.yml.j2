@@ -13,11 +13,11 @@ uwsgi:
     offload-threads: 2
     processes: 3
     py-call-osafterfork: true
-    pythonpath: /home/galaxy/galaxy/server/lib
+    pythonpath: {{ laniakea_galaxy_server_dir }}/lib
     socket: 127.0.0.1:4001
-    static-map: /static/style=/home/galaxy/galaxy/server/static/style
-    static-map: /static=/home/galaxy/galaxy/server/static
-    static-map: /favicon.ico=/home/galaxy/galaxy/server/static/favicon.ico
+    static-map: /static/style={{ laniakea_galaxy_server_dir }}/static/style
+    static-map: /static={{ laniakea_galaxy_server_dir }}/static
+    static-map: /favicon.ico={{ laniakea_galaxy_server_dir }}/static/favicon.ico
     static-safe: client/galaxy/images
     stats: 127.0.0.1:4010
     threads: 4
@@ -29,48 +29,48 @@ galaxy:
     allow_user_creation: 'True'
     allow_user_impersonation: 'True'
     brand: "{{ galaxy_instance_description }}"
-    builds_file_path: /home/galaxy/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
+    builds_file_path: {{ laniakea_galaxy_server_dir }}/tool-data/shared/ucsc/builds.txt.sample
     check_migrate_tools: false
     citation_cache_data_dir: {{ database_path }}/citations/data
     citation_cache_lock_dir: {{ database_path }}/citations/lock
     cluster_file_directory: {{ database_path }}/pbs
 #    conda_auto_install: true
     conda_prefix: {{ tool_deps_path }}/_conda
-    container_image_cache_path: /home/galaxy/galaxy/var/cache/container_cache
-    data_manager_config_file: /home/galaxy/galaxy/server/config/data_manager_conf.xml.sample
+    container_image_cache_path: {{ galaxy_install_path }}/var/cache/container_cache
+    data_manager_config_file: {{ laniakea_galaxy_server_dir }}/config/data_manager_conf.xml.sample
     database_connection: postgresql:///galaxy?host=/var/run/postgresql
-    datatypes_config_file: /home/galaxy/galaxy/server/config/datatypes_conf.xml.sample
-    external_service_type_config_file: /home/galaxy/galaxy/server/config/external_service_types_conf.xml.sample
+    datatypes_config_file: {{ laniakea_galaxy_server_dir }}/config/datatypes_conf.xml.sample
+    external_service_type_config_file: {{ laniakea_galaxy_server_dir }}/config/external_service_types_conf.xml.sample
     file_path: {{ database_path }}/files
     ftp_upload_dir: {{ database_path }}/ftp
     ftp_upload_site: ftp://localhost
     install_database_connection: postgresql:///galaxy_tools?host=/var/run/postgresql
-    integrated_tool_panel_config: /home/galaxy/galaxy/config/integrated_tool_panel.xml
-    job_config_file: /home/galaxy/galaxy/config/job_conf.xml
+    integrated_tool_panel_config: {{ laniakea_galaxy_config_dir }}/integrated_tool_panel.xml
+    job_config_file: {{ laniakea_galaxy_config_dir }}/job_conf.xml
     job_working_directory: {{ database_path }}/job_working_directory
-    migrated_tools_config: /home/galaxy/galaxy/config/migrated_tools_conf.xml
-    mulled_resolution_cache_data_dir: /home/galaxy/galaxy/var/mulled/data
-    mulled_resolution_cache_lock_dir: /home/galaxy/galaxy/var/mulled/lock
+    migrated_tools_config: {{ laniakea_galaxy_config_dir }}/migrated_tools_conf.xml
+    mulled_resolution_cache_data_dir: {{ galaxy_install_path }}/var/mulled/data
+    mulled_resolution_cache_lock_dir: {{ galaxy_install_path }}/var/mulled/lock
     new_file_path: {{ database_path }}/tmp
     new_user_dataset_access_role_default_private: 'True'
     nginx_upload_path: /_upload
     nginx_upload_store: {{ database_path }}/tmp/nginx_upload_store
     object_store_cache_path: {{ database_path }}/object_store_cache
-    openid_config_file: /home/galaxy/galaxy/server/config/openid_conf.xml.sample
-    openid_consumer_cache_path: /home/galaxy/galaxy/var/cache/openid_consumer_cache
+    openid_config_file: {{ laniakea_galaxy_server_dir }}/config/openid_conf.xml.sample
+    openid_consumer_cache_path: {{ galaxy_install_path }}/var/cache/openid_consumer_cache
     require_login: 'True'
-    shed_data_manager_config_file: /home/galaxy/galaxy/config/shed_data_manager_conf.xml
-    shed_tool_config_file: /home/galaxy/galaxy/config/shed_tool_conf.xml
-    shed_tool_data_table_config: /home/galaxy/galaxy/config/shed_tool_data_table_conf.xml
+    shed_data_manager_config_file: {{ laniakea_galaxy_config_dir }}/shed_data_manager_conf.xml
+    shed_tool_config_file: {{ laniakea_galaxy_config_dir }}/shed_tool_conf.xml
+    shed_tool_data_table_config: {{ laniakea_galaxy_config_dir }}/shed_tool_data_table_conf.xml
     template_cache_path: {{ database_path }}/compiled_templates
     tool_cache_data_dir: {{ database_path }}/tool_cache
-    tool_config_file: /home/galaxy/galaxy/server/config/tool_conf.xml.sample
-    tool_data_path: /home/galaxy/galaxy/var/tool-data
-    tool_data_table_config_path: /home/galaxy/galaxy/server/config/tool_data_table_conf.xml.sample
-    tool_dependency_dir: /export/tool_deps
+    tool_config_file: {{ laniakea_galaxy_server_dir }}/config/tool_conf.xml.sample
+    tool_data_path: {{ galaxy_install_path }}/var/tool-data
+    tool_data_table_config_path: /cvmfs/{{ ref_data_cvmfs_server }}/byhand/location/tool_data_table_conf.xml
+    tool_dependency_dir: {{ tool_deps_path }}
     tool_search_index_dir: {{ database_path }}/tool_search_index_dir
-    tool_sheds_config_file: /home/galaxy/galaxy/config/tool_sheds_conf.xml
-    ucsc_build_sites: /home/galaxy/galaxy/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample
+    tool_sheds_config_file: {{ laniakea_galaxy_config_dir }}/tool_sheds_conf.xml
+    ucsc_build_sites: {{ laniakea_galaxy_server_dir }}/tool-data/shared/ucsc/ucsc_build_sites.txt.sample
     visualization_plugins_directory: config/plugins/visualizations
     whoosh_index_dir: {{ database_path }}/whoosh_indexes
 # BEGIN ANSIBLE MANAGED BLOCK
@@ -78,7 +78,7 @@ galaxy:
     mule: lib/galaxy/main.py
     farm: job-handlers:1
 # END ANSIBLE MANAGED BLOCK
-#    interactive_environment_plugins_directory: /home/galaxy/galaxy/server/config/plugins/interactive_environments
+#    interactive_environment_plugins_directory: {{ laniakea_galaxy_server_dir }}/config/plugins/interactive_environments
 #    #interactive_block
 #    dynamic_proxy_manage: true
 #    dynamic_proxy_session_map: '{{ database_path }}/session_map.sqlite'

@@ -1,6 +1,7 @@
 Role Name
 =========
 Role to plant lanikaea flavor in a Galaxy-minimal instance.
+
 ### Flavor (currently) supported
 - galaxy-rna-workbench  
 - galaxy-testing
