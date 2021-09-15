@@ -6,8 +6,8 @@ import shutil
 import subprocess
 import glob
 
-conda_destination='{{ tool_deps_path }}' 
-shed_tool_destination='{{ shed_tool_destination }}'
+conda_destination='{{ tool_deps_path }}/' 
+shed_tool_destination='{{ shed_tool_destination }}/'
 cvmfs= "{{ restore_cvmfs_repository }}"
 cvmfs_path='/cvmfs/'+ cvmfs + '/'
 cvmfs_dump= cvmfs_path + '/express-dump/'

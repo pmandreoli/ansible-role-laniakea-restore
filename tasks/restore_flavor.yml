@@ -22,6 +22,15 @@
     mode: u=rwx,g=rw,o=r
   when: not flavor.stat.exists
 
+- name: create/check destinations
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'  
+  with_items:
+    - "{{ tool_deps_path }}"
+    - "{{ shed_tool_destination }}"
+
 - name: run python script to restore flavor
   become: true
   command: /tmp/express-cvmfs-restore.py -f {{ galaxy_flavor }} 

@@ -3,7 +3,7 @@
   hosts: galaxy
   become: true
   vars:
-    galaxy_flavor: galaxy-rna-workbench
+    galaxy_flavor: galaxy-pillar
     #    galaxy-rna-workbench  galaxy-testing
   roles:
     - { role: ../../ansible-role-laniakea-restore }
