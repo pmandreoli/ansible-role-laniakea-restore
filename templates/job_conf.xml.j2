@@ -9,12 +9,12 @@
         </plugin>
 {% endif %}
     </plugins>
-    <handlers default="handlers">
+<!--    <handlers default="handlers">
 	<handler id="handler_galaxy_0" tags="handlers"/>	
 	<handler id="handler_galaxy_1" tags="handlers"/>
 	<handler id="handler_galaxy_2" tags="handlers"/>
         <handler id="handler_galaxy_3" tags="handlers"/>
-    </handlers>
+</handlers>-->
 {% if galaxy_lrms == "slurm" %}
     <destinations default="slurm">
         <destination id="slurm" runner="slurm" tags="mycluster" >
